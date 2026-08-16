@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shelley | Premium Massage Therapy &amp; Wellness</title>
+  <meta name="description" content="Experience top-notch professional massage therapy. Energy clearing, Nuru, Deep Tissue, and more in a luxurious, serene environment.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Della+Respira&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════════════════════════ -->
+  <header id="main-header">
+    <nav class="container">
+      <a href="#home" class="logo" aria-label="Shelley Wellness — Home">
+        <span class="logo-text">Shelley</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#terms">Terms</a></li>
+        <li><a href="#book" class="btn-primary">Book Now</a></li>
+      </ul>
+      <button class="mobile-toggle" aria-label="Toggle Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" role="navigation" aria-label="Mobile navigation">
+      <ul role="list">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#terms">Terms</a></li>
+        <li><a href="#book" class="btn-primary">Book Now</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ════════════════════════════════════════════════════
+         HERO
+    ════════════════════════════════════════════════════════ -->
+    <section id="home" class="hero" aria-label="Hero section">
+      <div class="slider" role="region" aria-label="Image slideshow" aria-live="off">
+        <div class="slide active">
+          <img src="assets/hero1.jpg" alt="Luxurious massage therapy room with warm candlelight" loading="eager">
+        </div>
+        <div class="slide">
+          <img src="assets/hero2.jpg" alt="Serene spa interior with bamboo and candlelit stone basin" loading="lazy">
+        </div>
+        <div class="slide">
+          <img src="assets/hero3.jpg" alt="Zen minimalist spa room with morning light and orchid" loading="lazy">
+        </div>
+      </div>
+
+      <div class="container hero-content">
+        <h1>Reclaim Your<br>Inner Balance</h1>
+        <p class="sub-text">Professional massage therapy designed for total rejuvenation and energetic clearing.</p>
+        <div class="hero-btns">
+          <a href="#services" class="btn-outline">Explore Services</a>
+          <a href="#book" class="btn-primary" onclick="openBooking(); return false;">Book Now</a>
+        </div>
+      </div>
+
+      <!-- Slider dots -->
+      <div class="slider-dots" role="tablist" aria-label="Slide navigation">
+        <span class="dot active" role="tab" aria-label="Slide 1" aria-selected="true" tabindex="0"></span>
+        <span class="dot" role="tab" aria-label="Slide 2" aria-selected="false" tabindex="0"></span>
+        <span class="dot" role="tab" aria-label="Slide 3" aria-selected="false" tabindex="0"></span>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════
+         SERVICES
+    ════════════════════════════════════════════════════════ -->
+    <section id="services" class="services">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="reveal-up">Our Services</h2>
+          <div class="section-divider reveal-up"></div>
+          <p class="reveal-up">Each session is a journey towards wellness and peace.</p>
+        </div>
+
+        <div class="services-grid">
+
+          <!-- Energy Clearing -->
+          <div class="service-card reveal-up" onclick="openBooking('Energy Clearing Session', 200)" role="button" tabindex="0" aria-label="Book Energy Clearing Session for $200">
+            <div class="service-img">
+              <img src="assets/service_energy.jpg" alt="Energy Clearing Session — therapist performing healing" loading="lazy">
+            </div>
+            <div class="service-info">
+              <h3>Energy Clearing Session</h3>
+              <p>A balancing session designed to restore calm clarity, and energetic alignment.</p>
+              <span class="price">$200.00 / 60 min</span>
+            </div>
+          </div>
+
+          <!-- Nuru Massage -->
+          <div class="service-card reveal-up" onclick="openBooking('Nuru Massage (Special)', 250)" role="button" tabindex="0" aria-label="Book Nuru Massage for $250">
+            <div class="service-img placeholder-nuru">
+              <div class="placeholder-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M32 14c-8 0-14 10-14 18s6 12 14 12 14-4 14-12-6-18-14-18z" stroke="#121212" stroke-width="1.5" fill="none"/>
+                  <path d="M20 44c-4 2-8 6-8 12h40c0-6-4-10-8-12" stroke="#121212" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+            <div class="service-info">
+              <h3>Nuru Massage (Special)</h3>
+              <p>A deeply relaxing, full-body gliding massage using premium Nuru gel for smooth, continuous movement and heightened body awareness.</p>
+              <span class="price">$250.00 / 60 min</span>
+            </div>
+          </div>
+
+          <!-- Couples Massage -->
+          <div class="service-card reveal-up" onclick="openBooking('Couples Massage (Special)', 350)" role="button" tabindex="0" aria-label="Book Couples Massage for $350">
+            <div class="service-img placeholder-couples">
+              <div class="placeholder-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64" aria-hidden="true">
+                  <circle cx="22" cy="20" r="7" stroke="#121212" stroke-width="1.5" fill="none"/>
+                  <circle cx="42" cy="20" r="7" stroke="#121212" stroke-width="1.5" fill="none"/>
+                  <path d="M10 50c0-8 5-12 12-12h20c7 0 12 4 12 12" stroke="#121212" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+            <div class="service-info">
+              <h3>Couples Massage (Special)</h3>
+              <p>A synchronized relaxation experience for partners, tailored to your individual pressure preferences.</p>
+              <span class="price">$350.00 / 60 min</span>
+            </div>
+          </div>
+
+          <!-- Aromatherapy -->
+          <div class="service-card reveal-up" onclick="openBooking('Aromatherapy Massage', 200)" role="button" tabindex="0" aria-label="Book Aromatherapy Massage for $200">
+            <div class="service-img placeholder-aroma" style="background:linear-gradient(135deg,#d8c9b0 0%,#c0a888 100%);">
+              <div class="placeholder-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M32 10 Q26 18 26 26 Q26 36 32 40 Q38 36 38 26 Q38 18 32 10z" stroke="#121212" stroke-width="1.5" fill="none"/>
+                  <path d="M22 44h20M32 40v12" stroke="#121212" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+            <div class="service-info">
+              <h3>Aromatherapy Massage</h3>
+              <p>A soothing massage enhanced with essential oils selected to relax, uplift, or energize.</p>
+              <span class="price">$200.00 / 60 min</span>
+            </div>
+          </div>
+
+          <!-- Swedish -->
+          <div class="service-card reveal-up" onclick="openBooking('Swedish Massage', 200)" role="button" tabindex="0" aria-label="Book Swedish Massage for $200">
+            <div class="service-img">
+              <img src="assets/service_swedish.jpg" alt="Swedish massage — long flowing strokes on client's back" loading="lazy">
+            </div>
+            <div class="service-info">
+              <h3>Swedish Massage</h3>
+              <p>A classic relaxation massage using long, flowing strokes to ease muscle tension and promote calm.</p>
+              <span class="price">$200.00 / 60 min</span>
+            </div>
+          </div>
+
+          <!-- Deep Tissue -->
+          <div class="service-card reveal-up" onclick="openBooking('Deep Tissue Massage', 200)" role="button" tabindex="0" aria-label="Book Deep Tissue Massage for $200">
+            <div class="service-img">
+              <img src="assets/service_deep.jpg" alt="Deep tissue massage — firm therapeutic pressure on shoulders" loading="lazy">
+            </div>
+            <div class="service-info">
+              <h3>Deep Tissue Massage</h3>
+              <p>A therapeutic, firm-pressure massage targeting chronic muscle tension and tightness.</p>
+              <span class="price">$200.00 / 60 min</span>
+            </div>
+          </div>
+
+          <!-- Keratin -->
+          <div class="service-card reveal-up" onclick="openBooking('Keratin Permanent Hair Straightener', 200)" role="button" tabindex="0" aria-label="Book Keratin Hair Straightener for $200">
+            <div class="service-img placeholder-keratin">
+              <div class="placeholder-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M20 16 Q32 28 32 44" stroke="#121212" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                  <path d="M26 16 Q38 28 38 44" stroke="#121212" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                  <path d="M32 16 Q44 28 44 44" stroke="#121212" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                </svg>
+              </div>
+            </div>
+            <div class="service-info">
+              <h3>Keratin Permanent Hair Straightener</h3>
+              <p>A smoothing, long-lasting treatment for sleek, manageable hair.</p>
+              <span class="price">$200.00 / 60 min</span>
+            </div>
+          </div>
+
+          <!-- Body Wrap -->
+          <div class="service-card reveal-up" onclick="openBooking('Oasis Aloe Body Wrap', 150)" role="button" tabindex="0" aria-label="Book Oasis Aloe Body Wrap for $150">
+            <div class="service-img placeholder-wrap">
+              <div class="placeholder-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64" aria-hidden="true">
+                  <ellipse cx="32" cy="32" rx="16" ry="22" stroke="#121212" stroke-width="1.5" fill="none"/>
+                  <path d="M16 32 Q32 26 48 32" stroke="#121212" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                  <path d="M18 40 Q32 34 46 40" stroke="#121212" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                </svg>
+              </div>
+            </div>
+            <div class="service-info">
+              <h3>Oasis Aloe Body Wrap</h3>
+              <p>A hydrating full-body wrap using cooling aloe to nourish, soothe, and rejuvenate the skin.</p>
+              <span class="price">$150.00 / 60 min</span>
+            </div>
+          </div>
+
+          <!-- Ashiatsu -->
+          <div class="service-card reveal-up" onclick="openBooking('Ashiatsu Massage', 150)" role="button" tabindex="0" aria-label="Book Ashiatsu Massage for $150">
+            <div class="service-img placeholder-ashi">
+              <div class="placeholder-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M26 18 Q22 26 24 36 Q26 44 32 46 Q38 44 40 36 Q42 26 38 18" stroke="#121212" stroke-width="1.5" fill="none"/>
+                  <path d="M26 46 Q24 52 22 56M38 46 Q40 52 42 56" stroke="#121212" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                </svg>
+              </div>
+            </div>
+            <div class="service-info">
+              <h3>Ashiatsu Massage</h3>
+              <p>A unique, barefoot massage technique delivering deep, broad pressure for full-body relief.</p>
+              <span class="price">$150.00 / 60 min</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════
+         WHY SHELLEY
+    ════════════════════════════════════════════════════════ -->
+    <section class="why-choose-us">
+      <div class="container">
+        <div class="grid-2">
+          <div class="reveal-up">
+            <h2 class="section-title">Why Shelley?</h2>
+            <p class="section-desc">We combine ancient healing techniques with modern luxury to provide an unparalleled wellness experience.</p>
+            <ul class="features-list" role="list">
+              <li>
+                <strong>Complete Discretion</strong>
+                <p>Your privacy is our top priority. What happens in our sanctuary stays there.</p>
+              </li>
+              <li>
+                <strong>Professional Expertise</strong>
+                <p>Certified therapists with years of experience in various massage modalities.</p>
+              </li>
+              <li>
+                <strong>Serene Environment</strong>
+                <p>Our space is designed to calm your senses from the moment you walk in.</p>
+              </li>
+            </ul>
+          </div>
+          <div class="reveal-up">
+            <img src="assets/hero3.jpg" alt="Zen minimalist spa interior with morning light" class="feature-img" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════
+         TESTIMONIALS
+    ════════════════════════════════════════════════════════ -->
+    <section id="testimonials" class="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="reveal-up">What Clients Say</h2>
+          <div class="section-divider reveal-up"></div>
+        </div>
+        <div class="testimonials-grid">
+
+          <div class="testimonial-card reveal-up">
+            <div class="quote-icon" aria-hidden="true">&ldquo;</div>
+            <p>The most professional and rejuvenating experience I've ever had. The atmosphere is truly serene.</p>
+            <div class="client-info">
+              <span class="name">James R.</span>
+              <span class="role">Loyal Client</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card reveal-up">
+            <div class="quote-icon" aria-hidden="true">&ldquo;</div>
+            <p>Shelley has an amazing touch. The energy clearing session was life-changing for me.</p>
+            <div class="client-info">
+              <span class="name">Sarah M.</span>
+              <span class="role">First-time Visitor</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card reveal-up">
+            <div class="quote-icon" aria-hidden="true">&ldquo;</div>
+            <p>Exceptional service and complete discretion. The Nuru massage was an artistic masterpiece.</p>
+            <div class="client-info">
+              <span class="name">David W.</span>
+              <span class="role">Regular Client</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════
+         TERMS & CONDITIONS
+    ════════════════════════════════════════════════════════ -->
+    <section id="terms" class="terms">
+      <div class="container">
+        <div class="terms-wrapper reveal-up">
+          <div class="terms-header">
+            <h2>Terms &amp; Conditions</h2>
+          </div>
+          <div class="terms-grid">
+
+            <div class="term-item">
+              <span class="term-num" aria-hidden="true">01</span>
+              <p>You'd book for a particular date and time and agree to forfeit your booking if you don't show up.</p>
+            </div>
+
+            <div class="term-item">
+              <span class="term-num" aria-hidden="true">02</span>
+              <p>You can't touch me until I say so.</p>
+            </div>
+
+            <div class="term-item">
+              <span class="term-num" aria-hidden="true">03</span>
+              <p>You'd have to take your bath before coming or at my place before we start.</p>
+            </div>
+
+            <div class="term-item">
+              <span class="term-num" aria-hidden="true">04</span>
+              <p>What happens at my place stays at my place. Discretion is paramount.</p>
+            </div>
+
+            <div class="term-item">
+              <span class="term-num" aria-hidden="true">05</span>
+              <p>No filming or recording of any kind is permitted.</p>
+            </div>
+
+            <div class="term-item highlighted">
+              <span class="term-num" aria-hidden="true">06</span>
+              <p>Booking for all services is $100 and the $100 is deducted from the service costs. This ensures availability and commitment.</p>
+            </div>
+
+            <div class="term-item">
+              <span class="term-num" aria-hidden="true">07</span>
+              <p>Incalls within city limits are available for an extra $50.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════
+         BOOKING CTA
+    ════════════════════════════════════════════════════════ -->
+    <section id="book" class="booking-cta">
+      <div class="container reveal-up">
+        <h2>Ready to Reserve Your Spot?</h2>
+        <p>Secure your appointment with a $100 deposit which will be deducted from your total service cost.</p>
+        <div class="cta-actions">
+          <a href="javascript:void(0)" onclick="openBooking()" class="btn-primary-lg">Proceed to Booking</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ════════════════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="logo-text" style="font-family:var(--font-heading);font-size:1.3rem;letter-spacing:0.25em;text-transform:uppercase;">Shelley</span>
+          <p>Elegance. Serenity. Wellness.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul role="list">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#terms">Terms</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <p>Professional Incalls &amp; Outcalls</p>
+          <p>Inquire for Location Details</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Shelley Massage Therapy. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════════════════
+       BOOKING MODAL
+  ════════════════════════════════════════════════════════ -->
+  <div id="booking-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-content">
+      <button class="close-modal" aria-label="Close booking modal">&times;</button>
+
+      <div class="booking-form-wrapper">
+        <h2 class="form-title" id="modal-title">Reserve Your Session</h2>
+        <p class="form-subtitle">Complete the steps below to secure your appointment.</p>
+
+        <!-- Step progress indicator -->
+        <div class="step-progress" aria-label="Form progress">
+          <div class="step-dot active" data-step="1">
+            <span class="num">1</span>
+            <span>Service</span>
+          </div>
+          <div class="step-dot" data-step="2">
+            <span class="num">2</span>
+            <span>Date &amp; Time</span>
+          </div>
+          <div class="step-dot" data-step="3">
+            <span class="num">3</span>
+            <span>Details</span>
+          </div>
+          <div class="step-dot" data-step="4">
+            <span class="num">4</span>
+            <span>Payment</span>
+          </div>
+        </div>
+
+        <form id="booking-form" novalidate>
+
+          <!-- ── Step 1: Service ─────────────────────────── -->
+          <div class="form-step active" data-step="1">
+            <h3>Step 1 — Choose Your Service</h3>
+
+            <div class="form-group">
+              <label for="service_select">Massage Type</label>
+              <select name="service_name" id="service_select" required onchange="updateSummary()">
+                <option value="">Select a service</option>
+                <option value="Energy Clearing Session"              data-price="200">Energy Clearing Session ($200.00)</option>
+                <option value="Nuru Massage (Special)"               data-price="250">Nuru Massage (Special) ($250.00)</option>
+                <option value="Couples Massage (Special)"            data-price="350">Couples Massage (Special) ($350.00)</option>
+                <option value="Aromatherapy Massage"                 data-price="200">Aromatherapy Massage ($200.00)</option>
+                <option value="Keratin Permanent Hair Straightener"  data-price="200">Keratin Permanent Hair Straightener ($200.00)</option>
+                <option value="Oasis Aloe Body Wrap"                 data-price="150">Oasis Aloe Body Wrap ($150.00)</option>
+                <option value="Swedish Massage"                      data-price="200">Swedish Massage ($200.00)</option>
+                <option value="Deep Tissue Massage"                  data-price="200">Deep Tissue Massage ($200.00)</option>
+                <option value="Ashiatsu Massage"                     data-price="150">Ashiatsu Massage ($150.00)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Location Type</label>
+              <div class="radio-box-group">
+                <label>
+                  <input type="radio" name="type" value="outcall" checked onchange="toggleAddressFields()">
+                  <div class="box-content">Outcall</div>
+                </label>
+                <label>
+                  <input type="radio" name="type" value="incall" onchange="toggleAddressFields()">
+                  <div class="box-content">Incall (+$50)</div>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group" id="address-container" style="display:none;">
+              <label for="incall-address">Your Address (for Incall)</label>
+              <input type="text" name="address" id="incall-address" placeholder="Enter the address where the therapist will visit">
+            </div>
+
+            <div class="form-group" id="outcall-address-container">
+              <label>Outcall Location</label>
+              <div style="padding:1rem 1.2rem;border:1px solid rgba(0,0,0,0.1);background:var(--color-milk-dark);font-size:0.88rem;color:var(--color-gray);line-height:1.7;">
+                Our address will be provided upon appointment confirmation.
+              </div>
+            </div>
+
+            <button type="button" class="btn-primary btn-next">Next Step</button>
+          </div>
+
+          <!-- ── Step 2: Date & Time ─────────────────────── -->
+          <div class="form-step" data-step="2">
+            <h3>Step 2 — Date &amp; Time</h3>
+
+            <div class="modal-grid-2">
+              <div class="form-group">
+                <label for="booking-date">Date</label>
+                <input type="date" name="date" id="booking-date" required min="">
+              </div>
+              <div class="form-group">
+                <label for="booking-time">Time (9 AM – 11 PM)</label>
+                <input type="time" name="time" id="booking-time" required min="09:00" max="23:00">
+                <small class="small-note">Booking is only available between 9:00 AM and 11:00 PM.</small>
+              </div>
+            </div>
+
+            <div class="btn-row">
+              <button type="button" class="btn-outline-dark btn-prev">Back</button>
+              <button type="button" class="btn-primary btn-next">Next Step</button>
+            </div>
+          </div>
+
+          <!-- ── Step 3: Personal Details ───────────────── -->
+          <div class="form-step" data-step="3">
+            <h3>Step 3 — Personal Details</h3>
+
+            <div class="modal-grid-2">
+              <div class="form-group">
+                <label for="booking-name">Full Name</label>
+                <input type="text" name="name" id="booking-name" required placeholder="Your Name" autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label for="booking-height">Height <span style="font-family:var(--font-body);text-transform:none;letter-spacing:0;font-size:0.75rem;color:var(--color-gray)">(Optional)</span></label>
+                <input type="text" name="height" id="booking-height" placeholder="e.g. 5'10&quot;">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="booking-email">Email Address</label>
+              <input type="email" name="email" id="booking-email" required placeholder="email@example.com" autocomplete="email">
+            </div>
+
+            <div class="form-group">
+              <label for="booking-phone">Phone Number</label>
+              <input type="tel" name="phone" id="booking-phone" required placeholder="+1 (000) 000-0000" autocomplete="tel">
+            </div>
+
+            <div class="btn-row">
+              <button type="button" class="btn-outline-dark btn-prev">Back</button>
+              <button type="button" class="btn-primary btn-next">Next Step</button>
+            </div>
+          </div>
+
+          <!-- ── Step 4: Payment & Confirmation ────────── -->
+          <div class="form-step" data-step="4">
+            <h3>Step 4 — Payment &amp; Confirmation</h3>
+
+            <!-- Summary box -->
+            <div class="summary-box" aria-live="polite">
+              <p>Service: <strong><span id="summary-service">—</span></strong></p>
+              <p>Location: <strong><span id="summary-extra">—</span></strong></p>
+              <p>Total Price: <strong><span id="summary-total">—</span></strong></p>
+              <p class="highlight">Deposit Required: <span id="summary-deposit">—</span></p>
+            </div>
+
+            <div class="form-group">
+              <label for="payment_method_select">Select Payment Method</label>
+              <select name="payment_method" id="payment_method_select" required>
+                <option value="">Choose Method</option>
+                <option value="chime"
+                  data-details="$DiscountKickzzz"
+                  data-bank-name=""
+                  data-account-name=""
+                  data-account-number=""
+                  data-routing-number=""
+                  data-swift-code=""
+                  data-check-details="">
+                  Chime
+                </option>
+                <option value="bitcoin"
+                  data-details="1DG9P4ZsPhgLu6r6WkBPedyqsMjcR5NYGC"
+                  data-bank-name=""
+                  data-account-name=""
+                  data-account-number=""
+                  data-routing-number=""
+                  data-swift-code=""
+                  data-check-details="">
+                  Bitcoin
+                </option>
+                <option value="giftcard"
+                  data-details="shelleyamber05@gmail.com"
+                  data-bank-name=""
+                  data-account-name=""
+                  data-account-number=""
+                  data-routing-number=""
+                  data-swift-code=""
+                  data-check-details="">
+                  Giftcard (Apple or Razer Gold)
+                </option>
+                <option value="bank"
+                  data-details=""
+                  data-bank-name="GO2 BANK"
+                  data-account-name="Marissa Wiltberger"
+                  data-account-number="15212200396701"
+                  data-routing-number="124303162"
+                  data-swift-code=""
+                  data-check-details="">
+                  Bank Transfer
+                </option>
+              </select>
+            </div>
+
+            <!-- Payment details reveal -->
+            <div id="payment-details-box" class="info-box" style="display:none;" aria-live="polite">
+              <div class="payment-label">Send deposit to:</div>
+              <div id="method-details-container"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="booking-screenshot">Upload Payment Screenshot</label>
+              <input type="file" name="screenshot" id="booking-screenshot" accept="image/*" required>
+            </div>
+
+            <div class="btn-row">
+              <button type="button" class="btn-outline-dark btn-prev">Back</button>
+              <button type="submit" class="btn-primary btn-submit">Confirm Booking</button>
+            </div>
+          </div>
+
+        </form>
+      </div><!-- /.booking-form-wrapper -->
+    </div><!-- /.modal-content -->
+  </div><!-- /#booking-modal -->
+
+  <!-- JS -->
+  <script src="js/main.js"></script>
+  <script>
+    // Set today as min date for booking
+    document.addEventListener('DOMContentLoaded', () => {
+      const dateInput = document.getElementById('booking-date');
+      if (dateInput) {
+        dateInput.min = new Date().toISOString().split('T')[0];
+      }
+    });
+  </script>
+
+</body>
+</html>
