@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shelley Admin Dashboard</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      Shelley Admin
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-item active" data-target="dashboard-view">Overview</div>
+      <div class="nav-item" data-target="bookings-view">Bookings</div>
+      <div class="nav-item" data-target="services-view">Services</div>
+      <div class="nav-item" data-target="settings-view">Settings</div>
+      <div style="margin-top: 40px;" class="nav-item" onclick="window.location.href='../index.html'">← Back to Site</div>
+    </nav>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <main class="main-wrapper">
+    <header class="topbar">
+      <h1 class="topbar-title" id="page-title">Overview</h1>
+      <div class="user-profile">
+        <span>Admin User</span>
+        <div class="avatar">A</div>
+      </div>
+    </header>
+
+    <div class="content-area">
+      
+      <!-- DASHBOARD VIEW -->
+      <section id="dashboard-view" class="view-section active">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>Total Bookings</h3>
+            <div class="value">124</div>
+          </div>
+          <div class="stat-card">
+            <h3>Pending Requests</h3>
+            <div class="value">5</div>
+          </div>
+          <div class="stat-card">
+            <h3>Revenue (This Month)</h3>
+            <div class="value">$8,450</div>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <div class="table-header">
+            <h2>Recent Bookings</h2>
+            <button class="btn btn-outline" onclick="document.querySelector('[data-target=\'bookings-view\']').click()">View All</button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Client Name</th>
+                <th>Service</th>
+                <th>Date & Time</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Michael T.</td>
+                <td>Nuru Massage (Special)</td>
+                <td>Aug 20, 2:00 PM</td>
+                <td><span class="badge pending">Pending</span></td>
+                <td><button class="btn btn-sm btn-outline">Review</button></td>
+              </tr>
+              <tr>
+                <td>Sarah W.</td>
+                <td>Energy Clearing Session</td>
+                <td>Aug 18, 10:30 AM</td>
+                <td><span class="badge confirmed">Confirmed</span></td>
+                <td><button class="btn btn-sm btn-outline">View</button></td>
+              </tr>
+              <tr>
+                <td>David L.</td>
+                <td>Deep Tissue Massage</td>
+                <td>Aug 17, 4:00 PM</td>
+                <td><span class="badge confirmed">Confirmed</span></td>
+                <td><button class="btn btn-sm btn-outline">View</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- BOOKINGS VIEW -->
+      <section id="bookings-view" class="view-section">
+        <div class="table-container">
+          <div class="table-header">
+            <h2>All Bookings</h2>
+            <button class="btn btn-primary">Add Manual Booking</button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Client Name</th>
+                <th>Service</th>
+                <th>Date & Time</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="bookings-table-body">
+              <!-- JS Populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SERVICES VIEW -->
+      <section id="services-view" class="view-section">
+        <div class="table-container">
+          <div class="table-header">
+            <h2>Manage Services</h2>
+            <button class="btn btn-primary">Add New Service</button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Service Name</th>
+                <th>Price</th>
+                <th>Duration</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="services-table-body">
+              <!-- JS Populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SETTINGS VIEW -->
+      <section id="settings-view" class="view-section">
+        <div class="table-container" style="padding: 32px; max-width: 600px;">
+          <h2 style="margin-bottom: 24px;">Website Settings</h2>
+          <div style="margin-bottom: 16px;">
+            <label style="display:block; margin-bottom:8px; font-weight:500; font-size:0.9rem;">Contact Email</label>
+            <input type="email" value="shelleyamber05@gmail.com" style="width:100%; padding:10px; border:1px solid #E2E8F0; border-radius:6px;">
+          </div>
+          <div style="margin-bottom: 16px;">
+            <label style="display:block; margin-bottom:8px; font-weight:500; font-size:0.9rem;">Deposit Amount ($)</label>
+            <input type="number" value="100" style="width:100%; padding:10px; border:1px solid #E2E8F0; border-radius:6px;">
+          </div>
+          <button class="btn btn-primary" style="margin-top: 16px;">Save Changes</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
