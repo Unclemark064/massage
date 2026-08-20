@@ -9,7 +9,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Della+Respira&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
@@ -26,7 +26,7 @@
   <header id="main-header">
     <nav class="container">
       <a href="#home" class="logo" aria-label="Shelley Wellness — Home">
-        <span class="logo-text">Shelley</span>
+        <span class="logo-text">Shell<em>e</em>y</span>
       </a>
       <ul class="nav-links" role="list">
         <li><a href="#home">Home</a></li>
@@ -73,11 +73,12 @@
       </div>
 
       <div class="container hero-content">
-        <h1>Reclaim Your<br>Inner Balance</h1>
-        <p class="sub-text">Professional massage therapy designed for total rejuvenation and energetic clearing.</p>
+        <p class="hero-eyebrow">Premium Wellness &amp; Massage Therapy</p>
+        <h1>Reclaim Your<br><em>Inner Balance</em></h1>
+        <p class="sub-text">Professional massage therapy designed for total rejuvenation, energetic clearing, and lasting peace of mind.</p>
         <div class="hero-btns">
           <a href="#services" class="btn-outline">Explore Services</a>
-          <a href="#book" class="btn-primary" onclick="openBooking(); return false;">Book Now</a>
+          <a href="#book" class="btn-gold" onclick="openBooking(); return false;">Book a Session</a>
         </div>
       </div>
 
@@ -87,6 +88,9 @@
         <span class="dot" role="tab" aria-label="Slide 2" aria-selected="false" tabindex="0"></span>
         <span class="dot" role="tab" aria-label="Slide 3" aria-selected="false" tabindex="0"></span>
       </div>
+
+      <!-- Scroll indicator -->
+      <div class="scroll-hint" aria-hidden="true">Scroll</div>
     </section>
 
     <!-- ════════════════════════════════════════════════════
@@ -95,9 +99,10 @@
     <section id="services" class="services">
       <div class="container">
         <div class="section-header">
+          <span class="section-eyebrow reveal-up">What We Offer</span>
           <h2 class="reveal-up">Our Services</h2>
           <div class="section-divider reveal-up"></div>
-          <p class="reveal-up">Each session is a journey towards wellness and peace.</p>
+          <p class="reveal-up">Each session is a curated journey towards wellness, peace, and renewal.</p>
         </div>
 
         <div class="services-grid">
@@ -254,24 +259,34 @@
       <div class="container">
         <div class="grid-2">
           <div class="reveal-up">
-            <h2 class="section-title">Why Shelley?</h2>
-            <p class="section-desc">We combine ancient healing techniques with modern luxury to provide an unparalleled wellness experience.</p>
+            <span class="section-eyebrow">The Shelley Difference</span>
+            <h2 class="section-title">Why Choose <em>Shelley?</em></h2>
+            <p class="section-desc">We combine ancient healing techniques with modern luxury to provide an unparalleled wellness experience tailored entirely to you.</p>
             <ul class="features-list" role="list">
               <li>
-                <strong>Complete Discretion</strong>
-                <p>Your privacy is our top priority. What happens in our sanctuary stays there.</p>
+                <span class="feature-num">01</span>
+                <div>
+                  <strong>Complete Discretion</strong>
+                  <p>Your privacy is our top priority. What happens in our sanctuary stays there, always.</p>
+                </div>
               </li>
               <li>
-                <strong>Professional Expertise</strong>
-                <p>Certified therapists with years of experience in various massage modalities.</p>
+                <span class="feature-num">02</span>
+                <div>
+                  <strong>Professional Expertise</strong>
+                  <p>Certified therapists with years of experience across various massage modalities.</p>
+                </div>
               </li>
               <li>
-                <strong>Serene Environment</strong>
-                <p>Our space is designed to calm your senses from the moment you walk in.</p>
+                <span class="feature-num">03</span>
+                <div>
+                  <strong>Serene Environment</strong>
+                  <p>Our space is designed to calm your senses from the very first moment you arrive.</p>
+                </div>
               </li>
             </ul>
           </div>
-          <div class="reveal-up">
+          <div class="feature-img-wrap reveal-up">
             <img src="assets/hero3.jpg" alt="Zen minimalist spa interior with morning light" class="feature-img" loading="lazy">
           </div>
         </div>
@@ -284,14 +299,16 @@
     <section id="testimonials" class="testimonials">
       <div class="container">
         <div class="section-header">
+          <span class="section-eyebrow reveal-up">Client Stories</span>
           <h2 class="reveal-up">What Clients Say</h2>
           <div class="section-divider reveal-up"></div>
         </div>
         <div class="testimonials-grid">
 
           <div class="testimonial-card reveal-up">
-            <div class="quote-icon" aria-hidden="true">&ldquo;</div>
-            <p>The most professional and rejuvenating experience I've ever had. The atmosphere is truly serene.</p>
+            <div class="stars">★★★★★</div>
+            <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+            <p>The most professional and rejuvenating experience I've ever had. The atmosphere is truly serene and every detail felt intentional.</p>
             <div class="client-info">
               <span class="name">James R.</span>
               <span class="role">Loyal Client</span>
@@ -299,8 +316,9 @@
           </div>
 
           <div class="testimonial-card reveal-up">
-            <div class="quote-icon" aria-hidden="true">&ldquo;</div>
-            <p>Shelley has an amazing touch. The energy clearing session was life-changing for me.</p>
+            <div class="stars">★★★★★</div>
+            <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+            <p>Shelley has an amazing touch. The energy clearing session was truly life-changing. I left feeling lighter than I have in years.</p>
             <div class="client-info">
               <span class="name">Sarah M.</span>
               <span class="role">First-time Visitor</span>
@@ -308,8 +326,9 @@
           </div>
 
           <div class="testimonial-card reveal-up">
-            <div class="quote-icon" aria-hidden="true">&ldquo;</div>
-            <p>Exceptional service and complete discretion. The Nuru massage was an artistic masterpiece.</p>
+            <div class="stars">★★★★★</div>
+            <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+            <p>Exceptional service and complete discretion. The Nuru massage was an artistic masterpiece — worth every penny.</p>
             <div class="client-info">
               <span class="name">David W.</span>
               <span class="role">Regular Client</span>
@@ -328,6 +347,7 @@
         <div class="terms-wrapper reveal-up">
           <div class="terms-header">
             <h2>Terms &amp; Conditions</h2>
+            <span>Please read before booking</span>
           </div>
           <div class="terms-grid">
 
@@ -374,15 +394,17 @@
     <!-- ════════════════════════════════════════════════════
          BOOKING CTA
     ════════════════════════════════════════════════════════ -->
-    <section id="book" class="booking-cta">
-      <div class="container reveal-up">
-        <h2>Ready to Reserve Your Spot?</h2>
-        <p>Secure your appointment with a $100 deposit which will be deducted from your total service cost.</p>
-        <div class="cta-actions">
-          <a href="javascript:void(0)" onclick="openBooking()" class="btn-primary-lg">Proceed to Booking</a>
+    <section class="booking-cta">
+      <div class="container">
+        <span class="section-eyebrow reveal-up">Ready to Begin?</span>
+        <h2 class="reveal-up">Book Your <em>Session</em></h2>
+        <p class="reveal-up">Reserve your private session today. A $100 deposit secures your appointment — deducted from your total.</p>
+        <div class="cta-actions reveal-up">
+          <a href="#book" class="btn-gold" onclick="openBooking(); return false;">Book a Session Now</a>
         </div>
       </div>
     </section>
+
 
   </main>
 
