@@ -212,9 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Run restore state on load
-  restoreState();
-
   window.addEventListener('beforeunload', saveState);
 
   // ─── BOOKING MODAL OPEN/CLOSE ─────────────────────────────
@@ -579,5 +576,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Run restore state on load (after all functions are defined)
+  restoreState();
 
 });
