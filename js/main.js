@@ -151,6 +151,72 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ─── STATE PERSISTENCE (SMOOTH UX) ────────────────────────
+  const saveState = () => {
+    sessionStorage.setItem('booking_modal_open', modal.style.display === 'block');
+    sessionStorage.setItem('booking_step', currentStep);
+    sessionStorage.setItem('scroll_pos', window.scrollY);
+    
+    // Save form data
+    const formData = {};
+    const inputs = document.querySelectorAll('#booking-form input, #booking-form select, #booking-form textarea');
+    inputs.forEach(el => {
+      if(el.name && el.type !== 'file') {
+        if(el.type === 'radio' || el.type === 'checkbox') {
+          if(el.checked) formData[el.name] = el.value;
+        } else {
+          formData[el.name] = el.value;
+        }
+      }
+    });
+    sessionStorage.setItem('booking_form_data', JSON.stringify(formData));
+  };
+
+  const restoreState = () => {
+    // Restore form data
+    try {
+      const savedData = JSON.parse(sessionStorage.getItem('booking_form_data'));
+      if (savedData) {
+        Object.keys(savedData).forEach(key => {
+          const el = document.querySelector(`#booking-form [name="${key}"]`);
+          if (el) {
+            if (el.type === 'radio' || el.type === 'checkbox') {
+              const checkEl = document.querySelector(`#booking-form [name="${key}"][value="${savedData[key]}"]`);
+              if (checkEl) checkEl.checked = true;
+            } else {
+              el.value = savedData[key];
+            }
+          }
+        });
+      }
+    } catch(e) {}
+
+    // Restore modal state
+    const isModalOpen = sessionStorage.getItem('booking_modal_open') === 'true';
+    if (isModalOpen) {
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      const savedStep = parseInt(sessionStorage.getItem('booking_step')) || 1;
+      setStep(savedStep);
+      toggleAddressFields();
+      updateSummary();
+      renderPaymentDetails(); // ensure payment details render if method was selected
+    } else {
+      resetForm();
+    }
+
+    // Restore scroll
+    const scrollPos = sessionStorage.getItem('scroll_pos');
+    if (scrollPos) {
+      setTimeout(() => window.scrollTo(0, parseInt(scrollPos)), 10);
+    }
+  };
+
+  // Run restore state on load
+  restoreState();
+
+  window.addEventListener('beforeunload', saveState);
+
   // ─── BOOKING MODAL OPEN/CLOSE ─────────────────────────────
   const modal       = document.getElementById('booking-modal');
   const closeBtn    = document.querySelector('.close-modal');
@@ -158,18 +224,25 @@ document.addEventListener('DOMContentLoaded', () => {
   window.openBooking = (serviceName = '', price = 0) => {
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
-    resetForm();
+    
+    // Only reset if it wasn't already open
+    if(sessionStorage.getItem('booking_modal_open') !== 'true') {
+        resetForm();
+    }
+    
     if (serviceName) {
       const sel = document.getElementById('service_select');
       if (sel) sel.value = serviceName;
       updateSummary();
     }
+    saveState();
   };
 
   if (closeBtn) {
     closeBtn.addEventListener('click', () => {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto';
+      sessionStorage.setItem('booking_modal_open', 'false');
     });
   }
 
@@ -177,6 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === modal) {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto';
+      sessionStorage.setItem('booking_modal_open', 'false');
     }
   });
 
@@ -184,6 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape' && modal.style.display === 'block') {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto';
+      sessionStorage.setItem('booking_modal_open', 'false');
     }
   });
 
@@ -216,6 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (n === TOTAL_STEPS) updateSummary();
+    saveState();
   };
 
   const resetForm = () => {
@@ -228,6 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (firstStep) firstStep.classList.add('active');
     const firstDot  = getStepDot(1);
     if (firstDot) firstDot.classList.add('active');
+    saveState();
   };
 
   document.querySelectorAll('.btn-next').forEach(btn => {
@@ -282,6 +359,15 @@ document.addEventListener('DOMContentLoaded', () => {
         opt.dataset.swiftCode = pm.swift_code || '';
         sel.appendChild(opt);
       });
+
+      // After fetching, if we restored a payment method from session storage, set it and render details
+      try {
+        const savedData = JSON.parse(sessionStorage.getItem('booking_form_data'));
+        if (savedData && savedData.payment) {
+          sel.value = savedData.payment;
+        }
+      } catch(e) {}
+      renderPaymentDetails();
     } catch (e) { console.error('Failed to load payment methods', e); }
   }
   fetchPaymentMethods();
