@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shelley Admin — Login</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    body { justify-content: center; align-items: center; background: #121212; }
+    .login-box {
+      background: #fff;
+      padding: 48px;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .login-box h1 { font-size: 1.5rem; margin-bottom: 8px; font-family: 'Della Respira', serif; }
+    .login-box p  { color: #64748B; font-size: 0.9rem; margin-bottom: 32px; }
+    .field { margin-bottom: 20px; }
+    .field label { display: block; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+    .field input  { width: 100%; padding: 12px 14px; border: 1px solid #E2E8F0; border-radius: 6px; font-size: 0.95rem; }
+    .field input:focus { outline: none; border-color: #121212; }
+    .btn-login { width: 100%; padding: 13px; background: #121212; color: #fff; border: none; border-radius: 6px; font-size: 0.95rem; font-weight: 600; cursor: pointer; margin-top: 8px; }
+    .btn-login:hover { background: #1E1E1E; }
+    .error-msg { color: #EF4444; font-size: 0.85rem; margin-top: 12px; display: none; }
+    .back-link { display: block; text-align: center; margin-top: 20px; color: #64748B; font-size: 0.85rem; }
+    .back-link a { color: #121212; font-weight: 600; text-decoration: none; }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Della+Respira&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="login-box">
+    <h1>Shelley Admin</h1>
+    <p>Sign in to access the dashboard.</p>
+    <div class="field">
+      <label for="password">Admin Password</label>
+      <input type="password" id="password" placeholder="Enter your password" autofocus>
+    </div>
+    <button class="btn-login" id="login-btn">Sign In</button>
+    <p class="error-msg" id="error-msg">Incorrect password. Please try again.</p>
+    <p class="back-link"><a href="../index.html">← Back to Website</a></p>
+  </div>
+
+  <script>
+    const btn = document.getElementById('login-btn');
+    const errorMsg = document.getElementById('error-msg');
+
+    btn.addEventListener('click', login);
+    document.getElementById('password').addEventListener('keydown', e => {
+      if (e.key === 'Enter') login();
+    });
+
+    async function login() {
+      const pw = document.getElementById('password').value.trim();
+      if (!pw) return;
+      btn.textContent = 'Signing in…';
+      btn.disabled = true;
+      errorMsg.style.display = 'none';
+
+      try {
+        const res = await fetch('../api/auth.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pw })
+        });
+        const data = await res.json();
+        if (data.success) {
+          localStorage.setItem('shelley_admin_token', data.data.token);
+          window.location.href = 'index.html';
+        } else {
+          throw new Error(data.error || 'Login failed');
+        }
+      } catch (err) {
+        errorMsg.style.display = 'block';
+        btn.textContent = 'Sign In';
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

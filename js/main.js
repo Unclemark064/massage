@@ -428,26 +428,43 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.textContent = 'Submitting…';
       submitBtn.disabled = true;
 
-      // Simulate submission — replace with real API call
-      await new Promise(res => setTimeout(res, 1500));
+      try {
+        const formData = new FormData(bookingForm);
+        
+        // Ensure manual fields from step 1 are included
+        const sel = document.getElementById('service_select');
+        formData.append('service', sel.value);
+        
+        const res = await fetch('api/bookings.php', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        
+        if (!res.ok) throw new Error(data.error || 'Submission failed');
 
-      // Show success state in step 4
-      const step4 = getStep(4);
-      if (step4) {
-        step4.innerHTML = `
-          <div style="text-align:center;padding:3rem 0;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64" style="margin:0 auto 1.5rem;" aria-hidden="true">
-              <circle cx="32" cy="32" r="32" fill="#121212"/>
-              <path d="M20 33l9 9 16-16" stroke="#FDF5E6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <h3 style="font-size:1.4rem;letter-spacing:0.1em;margin-bottom:1rem;">Booking Received</h3>
-            <p style="color:var(--color-gray);font-size:0.9rem;line-height:1.8;max-width:360px;margin:0 auto 2rem;">
-              Thank you! Your booking has been submitted. We'll confirm your appointment once payment is verified.
-            </p>
-            <button type="button" class="btn-primary" onclick="document.getElementById('booking-modal').style.display='none';document.body.style.overflow='auto';">
-              Close
-            </button>
-          </div>`;
+        // Show success state in step 4
+        const step4 = getStep(4);
+        if (step4) {
+          step4.innerHTML = `
+            <div style="text-align:center;padding:3rem 0;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64" style="margin:0 auto 1.5rem;" aria-hidden="true">
+                <circle cx="32" cy="32" r="32" fill="#121212"/>
+                <path d="M20 33l9 9 16-16" stroke="#FDF5E6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <h3 style="font-size:1.4rem;letter-spacing:0.1em;margin-bottom:1rem;">Booking Received</h3>
+              <p style="color:var(--color-gray);font-size:0.9rem;line-height:1.8;max-width:360px;margin:0 auto 2rem;">
+                ${data.data.message || "Thank you! Your booking has been submitted. We'll confirm your appointment once payment is verified."}
+              </p>
+              <button type="button" class="btn-primary" onclick="document.getElementById('booking-modal').style.display='none';document.body.style.overflow='auto';">
+                Close
+              </button>
+            </div>`;
+        }
+      } catch (error) {
+        alert(error.message);
+        submitBtn.textContent = 'Confirm Booking';
+        submitBtn.disabled = false;
       }
     });
   }

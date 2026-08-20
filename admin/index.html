@@ -19,6 +19,7 @@
       <div class="nav-item" data-target="services-view">Services</div>
       <div class="nav-item" data-target="settings-view">Settings</div>
       <div style="margin-top: 40px;" class="nav-item" onclick="window.location.href='../index.html'">← Back to Site</div>
+      <div class="nav-item" style="color:var(--danger-color);" onclick="logout()">Logout</div>
     </nav>
   </aside>
 
@@ -39,15 +40,15 @@
         <div class="stats-grid">
           <div class="stat-card">
             <h3>Total Bookings</h3>
-            <div class="value">124</div>
+            <div class="value">0</div>
           </div>
           <div class="stat-card">
             <h3>Pending Requests</h3>
-            <div class="value">5</div>
+            <div class="value">0</div>
           </div>
           <div class="stat-card">
             <h3>Revenue (This Month)</h3>
-            <div class="value">$8,450</div>
+            <div class="value">$0</div>
           </div>
         </div>
 
@@ -67,27 +68,6 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Michael T.</td>
-                <td>Nuru Massage (Special)</td>
-                <td>Aug 20, 2:00 PM</td>
-                <td><span class="badge pending">Pending</span></td>
-                <td><button class="btn btn-sm btn-outline">Review</button></td>
-              </tr>
-              <tr>
-                <td>Sarah W.</td>
-                <td>Energy Clearing Session</td>
-                <td>Aug 18, 10:30 AM</td>
-                <td><span class="badge confirmed">Confirmed</span></td>
-                <td><button class="btn btn-sm btn-outline">View</button></td>
-              </tr>
-              <tr>
-                <td>David L.</td>
-                <td>Deep Tissue Massage</td>
-                <td>Aug 17, 4:00 PM</td>
-                <td><span class="badge confirmed">Confirmed</span></td>
-                <td><button class="btn btn-sm btn-outline">View</button></td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -98,7 +78,6 @@
         <div class="table-container">
           <div class="table-header">
             <h2>All Bookings</h2>
-            <button class="btn btn-primary">Add Manual Booking</button>
           </div>
           <table>
             <thead>
@@ -123,7 +102,6 @@
         <div class="table-container">
           <div class="table-header">
             <h2>Manage Services</h2>
-            <button class="btn btn-primary">Add New Service</button>
           </div>
           <table>
             <thead>
@@ -148,13 +126,13 @@
           <h2 style="margin-bottom: 24px;">Website Settings</h2>
           <div style="margin-bottom: 16px;">
             <label style="display:block; margin-bottom:8px; font-weight:500; font-size:0.9rem;">Contact Email</label>
-            <input type="email" value="shelleyamber05@gmail.com" style="width:100%; padding:10px; border:1px solid #E2E8F0; border-radius:6px;">
+            <input type="email" id="set-email" style="width:100%; padding:10px; border:1px solid #E2E8F0; border-radius:6px;">
           </div>
           <div style="margin-bottom: 16px;">
             <label style="display:block; margin-bottom:8px; font-weight:500; font-size:0.9rem;">Deposit Amount ($)</label>
-            <input type="number" value="100" style="width:100%; padding:10px; border:1px solid #E2E8F0; border-radius:6px;">
+            <input type="number" id="set-deposit" style="width:100%; padding:10px; border:1px solid #E2E8F0; border-radius:6px;">
           </div>
-          <button class="btn btn-primary" style="margin-top: 16px;">Save Changes</button>
+          <button class="btn btn-primary" id="save-settings-btn" style="margin-top: 16px;">Save Changes</button>
         </div>
       </section>
 
