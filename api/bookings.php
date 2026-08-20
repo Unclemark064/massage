@@ -179,6 +179,10 @@ if ($method === 'PUT') {
 
             // Send email (requires mail server configuration in php.ini)
             @mail($to, $subject, $message, $headers);
+
+            // Log the email for local debugging / proof
+            $logMsg = "\n[" . date('Y-m-d H:i:s') . "] EMAIL SENT TO: $to\nSUBJECT: $subject\nBODY:\n$message\n------------------------\n";
+            file_put_contents(__DIR__ . '/mail_debug.log', $logMsg, FILE_APPEND);
         }
     }
 

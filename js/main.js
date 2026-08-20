@@ -261,6 +261,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ─── FETCH DYNAMIC DATA ───────────────────────────────────
+  async function fetchPaymentMethods() {
+    const sel = document.getElementById('payment_method_select');
+    if (!sel) return;
+    try {
+      const res = await fetch('api/payment_methods.php');
+      const data = await res.json();
+      if (!data.success) return;
+      
+      data.data.forEach(pm => {
+        const opt = document.createElement('option');
+        opt.value = pm.name;
+        opt.textContent = pm.name;
+        opt.dataset.details = pm.details || '';
+        opt.dataset.bankName = pm.bank_name || '';
+        opt.dataset.accountName = pm.account_name || '';
+        opt.dataset.accountNumber = pm.account_number || '';
+        opt.dataset.routingNumber = pm.routing_number || '';
+        opt.dataset.swiftCode = pm.swift_code || '';
+        sel.appendChild(opt);
+      });
+    } catch (e) { console.error('Failed to load payment methods', e); }
+  }
+  fetchPaymentMethods();
+
   // ─── SUMMARY UPDATE ───────────────────────────────────────
   window.updateSummary = () => {
     const sel  = document.getElementById('service_select');

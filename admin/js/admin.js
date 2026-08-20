@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (targetId === 'dashboard-view') loadStats();
       if (targetId === 'bookings-view') loadBookings();
       if (targetId === 'services-view') loadServices();
+      if (targetId === 'payments-view') loadPayments();
       if (targetId === 'settings-view') loadSettings();
     });
   });
@@ -74,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <td>${b.service}</td>
           <td>${b.date} ${b.time}</td>
           <td><span class="badge ${b.status}">${b.status}</span></td>
-          <td><button class="btn btn-sm btn-outline">Review</button></td>
         `;
         tbody.appendChild(tr);
       });
@@ -89,35 +89,47 @@ document.addEventListener('DOMContentLoaded', () => {
       tbody.innerHTML = '';
       data.forEach(b => {
         const tr = document.createElement('tr');
+        const proofLink = b.screenshot 
+          ? `<a href="../api/uploads/${b.screenshot}" target="_blank" style="color:var(--color-gray); text-decoration:underline;">View Proof</a>` 
+          : 'None';
+          
+        const statusBadge = `<span class="badge ${b.status}">${b.status}</span>`;
+        
+        let actionButtons = '';
+        if (b.status === 'pending') {
+          actionButtons = `
+            <button class="btn btn-sm btn-outline" style="color:#047857; border-color:#047857;" onclick="updateBookingStatus(${b.id}, 'confirmed')">Approve</button>
+            <button class="btn btn-sm btn-outline" style="color:#be123c; border-color:#be123c; margin-left:4px;" onclick="updateBookingStatus(${b.id}, 'cancelled')">Decline</button>
+          `;
+        } else {
+          actionButtons = `<button class="btn btn-sm btn-outline" onclick="deleteBooking(${b.id})">Delete</button>`;
+        }
+          
         tr.innerHTML = `
-          <td style="color:var(--text-muted); font-size:0.8rem;">#${b.id}</td>
+          <td style="color:var(--color-gray); font-size:0.8rem;">#${b.id}</td>
           <td style="font-weight:500;">${b.name}</td>
           <td>${b.service}</td>
           <td>${b.date} ${b.time}</td>
-          <td>
-            <select class="status-select" data-id="${b.id}" style="padding:4px; border-radius:4px;">
-              <option value="pending" ${b.status==='pending'?'selected':''}>Pending</option>
-              <option value="confirmed" ${b.status==='confirmed'?'selected':''}>Confirmed</option>
-              <option value="cancelled" ${b.status==='cancelled'?'selected':''}>Cancelled</option>
-            </select>
-          </td>
-          <td>
-            <button class="btn btn-sm btn-outline" onclick="deleteBooking(${b.id})">Delete</button>
-          </td>
+          <td>${proofLink}</td>
+          <td>${statusBadge}</td>
+          <td>${actionButtons}</td>
         `;
         tbody.appendChild(tr);
       });
-
-      document.querySelectorAll('.status-select').forEach(sel => {
-        sel.addEventListener('change', async (e) => {
-          const id = e.target.getAttribute('data-id');
-          const newStatus = e.target.value;
-          await apiFetch('bookings.php', { method: 'PUT', body: JSON.stringify({id, status: newStatus}) });
-          loadStats(); // update dashboard numbers
-        });
-      });
     } catch(e) { console.error(e); }
   }
+
+  window.updateBookingStatus = async function(id, newStatus) {
+    const action = newStatus === 'confirmed' ? 'Approve' : 'Decline';
+    if (!confirm(`Are you sure you want to ${action} this booking?`)) return;
+    
+    try {
+      await apiFetch('bookings.php', { method: 'PUT', body: JSON.stringify({id, status: newStatus}) });
+      alert(`Booking has been ${newStatus}. ${newStatus === 'confirmed' ? 'A confirmation email was sent to the client.' : ''}`);
+      loadBookings();
+      loadStats();
+    } catch(e) { alert(e.message); }
+  };
 
   window.deleteBooking = async function(id) {
     if(!confirm('Are you sure you want to delete this booking?')) return;
@@ -143,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <td>${statusBadge}</td>
           <td>
             <button class="btn btn-sm btn-outline" onclick="toggleService(${s.id}, ${s.active})">Toggle</button>
+            <button class="btn btn-sm btn-outline" onclick='openServiceModal(${JSON.stringify(s).replace(/'/g, "&apos;")})'>Edit</button>
           </td>
         `;
         tbody.appendChild(tr);
@@ -157,6 +170,41 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify({id, active: currentActive ? 0 : 1})
       });
       loadServices();
+    } catch(e) { alert(e.message); }
+  };
+
+  // --- PAYMENTS VIEW ---
+  async function loadPayments() {
+    try {
+      const data = await apiFetch('payment_methods.php?admin=1');
+      const tbody = document.getElementById('payments-table-body');
+      tbody.innerHTML = '';
+      data.forEach(p => {
+        const statusBadge = p.active ? '<span class="badge confirmed">Active</span>' : '<span class="badge cancelled">Inactive</span>';
+        const hasBank = p.bank_name || p.account_number ? `Bank: ${p.bank_name} <br> Acc: ${p.account_number}` : 'N/A';
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="font-weight:500;">${p.name}</td>
+          <td>${p.details || 'N/A'}</td>
+          <td style="font-size:0.8rem; color:var(--color-gray);">${hasBank}</td>
+          <td>${statusBadge}</td>
+          <td>
+            <button class="btn btn-sm btn-outline" onclick="togglePayment(${p.id}, ${p.active})">Toggle</button>
+            <button class="btn btn-sm btn-outline" onclick='openPaymentModal(${JSON.stringify(p).replace(/'/g, "&apos;")})'>Edit</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    } catch(e) { console.error(e); }
+  }
+
+  window.togglePayment = async function(id, currentActive) {
+    try {
+      await apiFetch('payment_methods.php', {
+        method: 'PUT',
+        body: JSON.stringify({id, active: currentActive ? 0 : 1})
+      });
+      loadPayments();
     } catch(e) { alert(e.message); }
   };
 
@@ -186,4 +234,71 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('shelley_admin_token');
     window.location.href = 'login.html';
   };
+
+  // --- MODALS LOGIC ---
+  window.closeModals = () => {
+    document.getElementById('service-modal').classList.remove('active');
+    document.getElementById('payment-modal').classList.remove('active');
+  };
+
+  window.openServiceModal = (s = null) => {
+    document.getElementById('service-modal-title').textContent = s ? 'Edit Service' : 'Add Service';
+    document.getElementById('service-id').value = s ? s.id : '';
+    document.getElementById('service-name').value = s ? s.name : '';
+    document.getElementById('service-desc').value = s ? s.description : '';
+    document.getElementById('service-price').value = s ? s.price : '';
+    document.getElementById('service-duration').value = s ? s.duration : '60';
+    document.getElementById('service-modal').classList.add('active');
+  };
+
+  window.openPaymentModal = (p = null) => {
+    document.getElementById('payment-modal-title').textContent = p ? 'Edit Payment Method' : 'Add Payment Method';
+    document.getElementById('payment-id').value = p ? p.id : '';
+    document.getElementById('payment-name').value = p ? p.name : '';
+    document.getElementById('payment-details').value = p ? p.details : '';
+    document.getElementById('payment-bank').value = p ? p.bank_name : '';
+    document.getElementById('payment-acc-name').value = p ? p.account_name : '';
+    document.getElementById('payment-acc-num').value = p ? p.account_number : '';
+    document.getElementById('payment-routing').value = p ? p.routing_number : '';
+    document.getElementById('payment-modal').classList.add('active');
+  };
+
+  document.getElementById('service-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = document.getElementById('service-id').value;
+    const body = {
+      name: document.getElementById('service-name').value,
+      description: document.getElementById('service-desc').value,
+      price: document.getElementById('service-price').value,
+      duration: document.getElementById('service-duration').value
+    };
+    if (id) body.id = id;
+
+    try {
+      await apiFetch('services.php', { method: id ? 'PUT' : 'POST', body: JSON.stringify(body) });
+      closeModals();
+      loadServices();
+    } catch(err) { alert(err.message); }
+  });
+
+  document.getElementById('payment-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = document.getElementById('payment-id').value;
+    const body = {
+      name: document.getElementById('payment-name').value,
+      details: document.getElementById('payment-details').value,
+      bank_name: document.getElementById('payment-bank').value,
+      account_name: document.getElementById('payment-acc-name').value,
+      account_number: document.getElementById('payment-acc-num').value,
+      routing_number: document.getElementById('payment-routing').value
+    };
+    if (id) body.id = id;
+
+    try {
+      await apiFetch('payment_methods.php', { method: id ? 'PUT' : 'POST', body: JSON.stringify(body) });
+      closeModals();
+      loadPayments();
+    } catch(err) { alert(err.message); }
+  });
+
 });

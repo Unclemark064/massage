@@ -33,7 +33,7 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#testimonials">Testimonials</a></li>
         <li><a href="#terms">Terms</a></li>
-        <li><a href="#book" class="btn-primary">Book Now</a></li>
+        <li><a href="#book" class="btn-primary" onclick="openBooking(); return false;">Book Now</a></li>
       </ul>
       <button class="mobile-toggle" aria-label="Toggle Menu" aria-expanded="false">
         <span></span>
@@ -49,7 +49,7 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#testimonials">Testimonials</a></li>
         <li><a href="#terms">Terms</a></li>
-        <li><a href="#book" class="btn-primary">Book Now</a></li>
+        <li><a href="#book" class="btn-primary" onclick="openBooking(); return false;">Book Now</a></li>
       </ul>
     </div>
   </header>
@@ -566,48 +566,9 @@
 
             <div class="form-group">
               <label for="payment_method_select">Select Payment Method</label>
-              <select name="payment_method" id="payment_method_select" required>
+              <select name="payment" id="payment_method_select" required>
                 <option value="">Choose Method</option>
-                <option value="chime"
-                  data-details="$DiscountKickzzz"
-                  data-bank-name=""
-                  data-account-name=""
-                  data-account-number=""
-                  data-routing-number=""
-                  data-swift-code=""
-                  data-check-details="">
-                  Chime
-                </option>
-                <option value="bitcoin"
-                  data-details="1DG9P4ZsPhgLu6r6WkBPedyqsMjcR5NYGC"
-                  data-bank-name=""
-                  data-account-name=""
-                  data-account-number=""
-                  data-routing-number=""
-                  data-swift-code=""
-                  data-check-details="">
-                  Bitcoin
-                </option>
-                <option value="giftcard"
-                  data-details="shelleyamber05@gmail.com"
-                  data-bank-name=""
-                  data-account-name=""
-                  data-account-number=""
-                  data-routing-number=""
-                  data-swift-code=""
-                  data-check-details="">
-                  Giftcard (Apple or Razer Gold)
-                </option>
-                <option value="bank"
-                  data-details=""
-                  data-bank-name="GO2 BANK"
-                  data-account-name="Marissa Wiltberger"
-                  data-account-number="15212200396701"
-                  data-routing-number="124303162"
-                  data-swift-code=""
-                  data-check-details="">
-                  Bank Transfer
-                </option>
+                <!-- JS Populated -->
               </select>
             </div>
 
