@@ -142,6 +142,46 @@ if ($method === 'PUT') {
     $vals[] = $id;
 
     $db->prepare('UPDATE bookings SET ' . implode(', ', $sets) . ' WHERE id = ?')->execute($vals);
+
+    // If status was changed to confirmed, send email
+    if (isset($body['status']) && $body['status'] === 'confirmed') {
+        // Fetch booking details for the email
+        $stmt = $db->prepare('SELECT * FROM bookings WHERE id = ?');
+        $stmt->execute([$id]);
+        $booking = $stmt->fetch();
+
+        if ($booking) {
+            $bookingCode = 'SHL-' . str_pad($id, 4, '0', STR_PAD_LEFT);
+            $to = $booking['email'];
+            $subject = 'Your Booking is Confirmed - Shelley Wellness';
+            
+            $message = "Hello {$booking['name']},\n\n";
+            $message .= "Your payment has been received and your booking is officially confirmed!\n\n";
+            $message .= "Booking Details:\n";
+            $message .= "--------------------------------------\n";
+            $message .= "Booking Code: {$bookingCode}\n";
+            $message .= "Service: {$booking['service']}\n";
+            $message .= "Date: {$booking['date']}\n";
+            $message .= "Time: {$booking['time']}\n";
+            if ($booking['type'] === 'outcall') {
+                $message .= "Location: Outcall (Address will be provided shortly)\n";
+            } else {
+                $message .= "Location: Incall (Your address: {$booking['address']})\n";
+            }
+            $message .= "--------------------------------------\n\n";
+            $message .= "We look forward to your session.\n\nWarm regards,\nShelley Wellness Massage";
+
+            // Get site email for 'From' header
+            $siteEmail = $db->query("SELECT value FROM settings WHERE key = 'contact_email'")->fetchColumn() ?: 'noreply@shelleywellnessmassages.org';
+            
+            $headers = "From: Shelley Wellness <{$siteEmail}>\r\n";
+            $headers .= "Reply-To: {$siteEmail}\r\n";
+
+            // Send email (requires mail server configuration in php.ini)
+            @mail($to, $subject, $message, $headers);
+        }
+    }
+
     json_ok(['updated' => $id]);
 }
 

@@ -4,42 +4,117 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shelley Admin — Login</title>
-  <link rel="stylesheet" href="css/admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Della+Respira&display=swap" rel="stylesheet">
   <style>
-    body { justify-content: center; align-items: center; background: #121212; }
-    .login-box {
-      background: #fff;
-      padding: 48px;
-      border-radius: 8px;
-      width: 100%;
-      max-width: 420px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    :root {
+      --color-milk: #FDF5E6;
+      --color-milk-dark: #F5EBD7;
+      --color-black: #121212;
+      --color-gray: #757575;
+      --font-family: 'Della Respira', Georgia, serif;
     }
-    .login-box h1 { font-size: 1.5rem; margin-bottom: 8px; font-family: 'Della Respira', serif; }
-    .login-box p  { color: #64748B; font-size: 0.9rem; margin-bottom: 32px; }
-    .field { margin-bottom: 20px; }
-    .field label { display: block; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
-    .field input  { width: 100%; padding: 12px 14px; border: 1px solid #E2E8F0; border-radius: 6px; font-size: 0.95rem; }
-    .field input:focus { outline: none; border-color: #121212; }
-    .btn-login { width: 100%; padding: 13px; background: #121212; color: #fff; border: none; border-radius: 6px; font-size: 0.95rem; font-weight: 600; cursor: pointer; margin-top: 8px; }
-    .btn-login:hover { background: #1E1E1E; }
-    .error-msg { color: #EF4444; font-size: 0.85rem; margin-top: 12px; display: none; }
-    .back-link { display: block; text-align: center; margin-top: 20px; color: #64748B; font-size: 0.85rem; }
-    .back-link a { color: #121212; font-weight: 600; text-decoration: none; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-family);
+      background-color: var(--color-milk);
+      color: var(--color-black);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      letter-spacing: 0.02em;
+    }
+    .login-box {
+      background: var(--color-milk-dark);
+      padding: 60px 48px;
+      border: 1px solid rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 460px;
+      text-align: center;
+    }
+    .login-box h1 {
+      font-size: 1.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .login-box p {
+      color: var(--color-gray);
+      font-size: 0.9rem;
+      margin-bottom: 40px;
+    }
+    .field {
+      margin-bottom: 24px;
+      text-align: left;
+    }
+    .field label {
+      display: block;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .field input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid rgba(0,0,0,0.15);
+      background: var(--color-milk);
+      font-family: var(--font-family);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .field input:focus { border-color: var(--color-black); }
+    .btn-login {
+      width: 100%;
+      padding: 16px;
+      background: var(--color-black);
+      color: var(--color-milk);
+      border: none;
+      font-family: var(--font-family);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      transition: opacity 0.3s;
+      margin-top: 12px;
+    }
+    .btn-login:hover { opacity: 0.85; }
+    .error-msg {
+      color: #b45309;
+      font-size: 0.85rem;
+      margin-top: 16px;
+      display: none;
+    }
+    .back-link {
+      display: block;
+      margin-top: 32px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .back-link a {
+      color: var(--color-gray);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .back-link a:hover { color: var(--color-black); }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Della+Respira&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="login-box">
     <h1>Shelley Admin</h1>
-    <p>Sign in to access the dashboard.</p>
+    <p>Sanctuary Management</p>
+    
     <div class="field">
       <label for="password">Admin Password</label>
-      <input type="password" id="password" placeholder="Enter your password" autofocus>
+      <input type="password" id="password" placeholder="Enter password" autofocus>
     </div>
-    <button class="btn-login" id="login-btn">Sign In</button>
+    
+    <button class="btn-login" id="login-btn">Enter Portal</button>
     <p class="error-msg" id="error-msg">Incorrect password. Please try again.</p>
-    <p class="back-link"><a href="../index.html">← Back to Website</a></p>
+    
+    <p class="back-link"><a href="../index.html">← Return to Sanctuary</a></p>
   </div>
 
   <script>
@@ -54,7 +129,7 @@
     async function login() {
       const pw = document.getElementById('password').value.trim();
       if (!pw) return;
-      btn.textContent = 'Signing in…';
+      btn.textContent = 'Authenticating…';
       btn.disabled = true;
       errorMsg.style.display = 'none';
 
@@ -73,7 +148,7 @@
         }
       } catch (err) {
         errorMsg.style.display = 'block';
-        btn.textContent = 'Sign In';
+        btn.textContent = 'Enter Portal';
         btn.disabled = false;
       }
     }
